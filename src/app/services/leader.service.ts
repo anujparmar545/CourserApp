@@ -8,7 +8,11 @@ export class LeaderService {
 
   constructor() { }
 
-  getAllLeaders(): Leader[] {
-    return LEADERS;
+  getAllLeaders(): Promise<Leader[]> {
+    return new Promise(resolve=> {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(LEADERS), 2000);
+    });
+   
   }
 }

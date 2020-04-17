@@ -4,7 +4,7 @@ import { DishService } from '../services/dish.service';
 import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import { LeaderService } from '../services/leader.service';
-
+import {  LEADERS } from '../shared/leader';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     
     this.promotionservice.getFeaturedPromotion().then(promotion => this.promotion = promotion);
 
-    for(this.leaders of this.leaderService.getAllLeaders()){
+    for(this.leaders of LEADERS){
 
       if(this.leaders.featured)
         this.featuredLeaders=this.leaders;
