@@ -16,7 +16,7 @@ fxLayoutGap.xs="0">
 <div fxFlex="40" *ngIf="dish">
  
 <mat-card >
-  <div><b>{{dish.name | uppercase}}</b></div>
+  <div><h3 *ngIf="dish">{{dish.name | uppercase}}</h3></div>
   <img height="400px" src={{dish.image}} alt={{dish.name}}><br>
   
   <mat-card-content>
