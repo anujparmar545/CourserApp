@@ -10,7 +10,7 @@
  
 <mat-card >
   <div><h3 *ngIf="dish">{{dish.name | uppercase}}</h3></div>
-  <img height="400px" src={{dish.image}} alt={{dish.name}}><br>
+  <img height="400px" src="{{ BaseURL + dish.image }}" alt={{dish.name}}><br>
   
   <mat-card-content>
     <p>{{ dish.description}}
