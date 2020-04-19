@@ -10,7 +10,6 @@ import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
 import { DatePipe } from '@angular/common';
- 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
@@ -24,6 +23,7 @@ export class DishdetailComponent implements OnInit {
   @ViewChild('fform') commentFormDirective;
 
     dish: Dish;
+    errMess: string;
 
     dishIds: string[];
     prev: string;
@@ -57,7 +57,7 @@ export class DishdetailComponent implements OnInit {
       private location: Location,
       private fb: FormBuilder,
       private datePipe: DatePipe,
-      @Inject('baseURL') private baseURL,
+      @Inject('BaseURL') public baseURL,
       
       ) { 
         this.createForm();
@@ -72,9 +72,9 @@ export class DishdetailComponent implements OnInit {
      
       //this.dishService.getDish(id).subscribe(dish => this.dish = dish);
 
-      this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+      this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds,errmess => this.errMess = <any>errmess);
       this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },errmess => this.errMess = <any>errmess);
 
     
     }
