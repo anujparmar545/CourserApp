@@ -1,7 +1,64 @@
+<div fxFlex="55">
+  <div style="margin-left: 30px;">
+  <h4>Our Address</h4>
+  <address style="text-size: 80%">
+    922, Lav Kush Colony<br> Mangliya Indore<br> MP, India<br>
+    <i class="fa fa-phone"></i>: +91-7024426675<br>
+    <i class="fa fa-fax"></i>: +852 8765 4321<br>
+    <i class="fa fa-envelope"></i>:
+    <a href="mailto:anujparmar545@gmail.com">anujparmar545@gmail.com</a>
+  </address>
+
+  
+  <table *ngIf="feedback && showfeedbackData" >
+    <th><h3>Your Submission</h3></th>
+    <tr>
+      <td>First Name :</td>
+      <td>{{feedback.firstname}}</td>
+    </tr>
+    <tr>
+      <td>Last Name :</td>
+      <td>{{feedback.lastname}}</td>
+    </tr>
+    <tr>
+      <td>Tel.No :</td>
+      <td>{{feedback.telnum}}</td>
+    </tr>
+    <tr>
+      <td>Email :</td>
+      <td>{{feedback.email}}</td>
+    </tr>
+    <tr>
+      <td>Contact you? :</td>
+      <td>{{feedback.agree}}</td>
+    </tr>
+    <tr>
+      <td>How?:</td>
+      <td>{{feedback.contacttype}}</td>
+    </tr>
+    <tr>
+      <td> Feedback:</td>
+      <td>{{feedback.message}}</td>
+    </tr>
+  </table>
+</div>
+</div>
+<br/>
+
+
 <div fxFlex fxFlexOffset="20px" class="form-size">
+  
   <h3>Send us your Feedback</h3>
+
+  <div   *ngIf="!spinner" >
+    <mat-spinner></mat-spinner><h4>Submitting Form. . . </h4>
+  </div>
+  <div fxFlex *ngIf="contactErr" [@expand]>
+    <h2>Error</h2>
+    <h4>{{contactErr}}</h4>
+  </div>
  
-  <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+  <form novalidate [formGroup]="feedbackForm" #fform="ngForm" *ngIf="formFlag" (ngSubmit)="onSubmit()">
     <p>
       <mat-form-field class="half-width">
         <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -39,6 +96,6 @@
         <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
       </mat-form-field>
     </p>
-    <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+    <button [disabled]="!feedbackForm.valid"type="submit" mat-button class="background-primary text-floral-white">Submit</button>
   </form>
 </div>
